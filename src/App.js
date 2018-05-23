@@ -34,12 +34,19 @@ class App extends Component {
     this.setState({todos: todos});
   }
 
+  deleteTodo(index){
+    console.log("onDelete was called for " + index);
+    let arr = this.state.todos;
+    arr.splice(index, 1);
+    this.setState({todos: arr})
+  }
+
   render() {
     return (
       <div className="App">
       <ul>
       { this.state.todos.map( (todo, index) =>
-           <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } />
+           <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } onDelete={() => this.deleteTodo(index)} />
          )}
       </ul>
       <form onSubmit={ (e) => this.handleSubmit(e)}>
